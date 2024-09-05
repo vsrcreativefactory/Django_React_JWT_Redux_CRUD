@@ -1,0 +1,90 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+}
+
+.profile-page {
+    position: relative;
+    z-index: 10;
+    padding: 80px;
+    text-align: left; /* Aligns content to the left */
+    min-height: 80vh;
+    background-color: #a3703d; /* Add a background color if necessary */
+
+}
+
+.profile-page::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: url('/path-to-your-background-image.jpg') no-repeat center center/cover; */
+    z-index: -1;
+    opacity: 0.3;
+}
+
+.profile-details {
+    position: relative;
+    z-index: 20;
+    margin: 20px 0;
+    width: 300px; /* Set a fixed width for the profile box */
+    padding: 20px;
+    background-color: #a4541e;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    left: 10; /* Align the box to the left */
+    position: absolute; /* Keep it at the left side of the page */
+}
+
+.profile-details p {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #ffffff;
+}
+
+.profile-details strong {
+    color: #000;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.profile-image {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+.profile-image input[type="file"] {
+    display: none;
+}
+
+.profile-image label {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+}
+

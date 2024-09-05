@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useContext } from "react";
 import {jwtDecode} from "jwt-decode"
 // import jwtDecode from "jwt-decode";
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ export const AuthProvider = ({children}) => {
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let [user, setUser] = useState(() => localStorage.getItem('authTokens') ? jwtDecode(localStorage.getItem('authTokens')) : null)
+    let [profileImage, setProfileImage] = useState(user?.profileImage || 'default-profile.png');
     let navigate = useNavigate();
     let loginUser = async (e) => {
         e.preventDefault();
@@ -45,7 +46,17 @@ export const AuthProvider = ({children}) => {
             alert('An unexpected error occurred');
         }
     };
-    
+
+    let uploadProfileImage = (imageFile) => {
+        // Handle image upload
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setProfileImage(reader.result);
+            // Optionally update user data with profile image URL
+        };
+        reader.readAsDataURL(imageFile);
+    };
+
     let logoutUser = () => {
         setAuthTokens(null);
         setUser(null)
@@ -57,6 +68,7 @@ export const AuthProvider = ({children}) => {
         user:user,
         loginUser : loginUser,
         logoutUser : logoutUser,
+        uploadProfileImage: uploadProfileImage,
     }
     return (
         <AuthContext.Provider value={contextData}>
