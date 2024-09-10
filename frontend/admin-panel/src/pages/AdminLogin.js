@@ -1,48 +1,61 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './AdminLogin.css';
 
 const AdminLogin = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+  const [adminUsername, setAdminUsername] = useState('');
+  const [adminPassword, setAdminPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://127.0.0.1:8000/api/admin/login/', {
-                username,
-                password,
-            });
-            if (response.status === 200) {
-                // Redirect to the admin dashboard
-                navigate('/admin/dashboard');
-            }
-        } catch (error) {
-            console.error("Login failed", error);
-        }
-    };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://127.0.0.1:8000/api/admin/login/', {
+        username: adminUsername,
+        password: adminPassword,
+      });
 
-    return (
-        <div>
-            <h1>Admin Login</h1>
-            <form onSubmit={handleLogin}>
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Username"
-                />
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password"
-                />
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    );
+      if (response.status === 200) {
+        alert('Admin logged in successfully');
+        // Redirect to the admin dashboard after successful login
+        navigate('/admindashboard');
+      }
+    } catch (err) {
+      setError('Invalid credentials, please try again.');
+    }
+  };
+
+  return (
+    <div className="admin-login-container">
+      <div className="login-box">
+        <h2>Admin Login</h2>
+        <form onSubmit={handleLogin}>
+          <div className="input-field">
+            <input
+              type="text"
+              value={adminUsername}
+              onChange={(e) => setAdminUsername(e.target.value)}
+              required
+            />
+            <label>Username</label>
+          </div>
+          <div className="input-field">
+            <input
+              type="password"
+              value={adminPassword}
+              onChange={(e) => setAdminPassword(e.target.value)}
+              required
+            />
+            <label>Password</label>
+          </div>
+          {error && <p className="error-message">{error}</p>}
+          <button type="submit" className="login-btn">Login</button>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default AdminLogin;
