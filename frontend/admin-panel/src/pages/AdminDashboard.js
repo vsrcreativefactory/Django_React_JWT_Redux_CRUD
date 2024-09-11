@@ -1,61 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import './AdminDashboard.css';
 
 const AdminDashboard = () => {
-    const [products, setProducts] = useState([]);
-    const [newProduct, setNewProduct] = useState({ name: '', description: '', price: '' });
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
-
-    const fetchProducts = async () => {
-        const response = await axios.get('http://127.0.0.1:8000/api/products/');
-        setProducts(response.data);
-    };
-
-    const createProduct = async () => {
-        const response = await axios.post('http://127.0.0.1:8000/api/products/', newProduct);
-        setProducts([...products, response.data]);
-    };
-
-    const deleteProduct = async (id) => {
-        await axios.delete(`http://127.0.0.1:8000/api/products/${id}/`);
-        setProducts(products.filter((product) => product.id !== id));
-    };
-
     return (
-        <div>
-            <h1>Admin Dashboard</h1>
-            <form onSubmit={createProduct}>
-                <input
-                    type="text"
-                    value={newProduct.name}
-                    onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-                    placeholder="Product Name"
-                />
-                <input
-                    type="text"
-                    value={newProduct.description}
-                    onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-                    placeholder="Description"
-                />
-                <input
-                    type="number"
-                    value={newProduct.price}
-                    onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-                    placeholder="Price"
-                />
-                <button type="submit">Create Product</button>
-            </form>
-
-            <ul>
-                {products.map((product) => (
-                    <li key={product.id}>
-                        {product.name} - {product.price} <button onClick={() => deleteProduct(product.id)}>Delete</button>
-                    </li>
-                ))}
-            </ul>
+        <div className="admin-dashboard">
+            <aside className="sidebar">
+                <h2>Admin Panel</h2>
+                <ul>
+                    <li><a href="#users">Manage Users</a></li>
+                    <li><a href="#analytics">Analytics</a></li>
+                    <li><a href="#settings">Settings</a></li>
+                    <li><a href="#logout">Logout</a></li>
+                </ul>
+            </aside>
+            <main className="main-content">
+                <section id="users">
+                    <h2>Manage Users</h2>
+                    <p>List of users will go here.</p>
+                    {/* Add CRUD operations for users */}
+                </section>
+                <section id="analytics">
+                    <h2>Analytics</h2>
+                    <p>Analytics data will go here.</p>
+                </section>
+                <section id="settings">
+                    <h2>Settings</h2>
+                    <p>Admin settings options will go here.</p>
+                </section>
+            </main>
         </div>
     );
 };
