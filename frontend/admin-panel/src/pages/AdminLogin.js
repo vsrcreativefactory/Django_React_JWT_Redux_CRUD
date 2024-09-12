@@ -20,7 +20,7 @@ const AdminLogin = () => {
       if (response.status === 200) {
         alert('Admin logged in successfully');
         // Redirect to the admin dashboard after successful login
-        navigate('/admindashboard');
+        navigate('/admin/dashboard');
       }
     } catch (err) {
       setError('Invalid credentials, please try again.');

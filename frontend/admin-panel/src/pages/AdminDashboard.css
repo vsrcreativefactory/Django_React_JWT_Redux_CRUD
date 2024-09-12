@@ -67,8 +67,24 @@ body {
     margin-bottom: 20px;
 }
 
-.main-content section {
-    margin-bottom: 40px;
+.main-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.main-content table, th, td {
+    border: 1px solid #ddd;
+}
+
+.main-content th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.main-content th {
+    background-color: #007bff;
+    color: white;
 }
 
 main p {
@@ -76,20 +92,27 @@ main p {
     color: #555;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .admin-dashboard {
-        flex-direction: column;
-    }
+/* Form styling */
+form input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+}
 
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
+form button {
+    padding: 10px;
+    background-color: #35c145;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-    .main-content {
-        margin-left: 0;
-        width: 100%;
-    }
+form button:hover {
+    background-color: #28a745;
+}
+
+/* Error message styling */
+.error-message {
+    color: red;
+    font-size: 14px;
 }
