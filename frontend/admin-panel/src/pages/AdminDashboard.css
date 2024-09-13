@@ -116,3 +116,46 @@ form button:hover {
     color: red;
     font-size: 14px;
 }
+
+/* Style for the search input */
+.search-input {
+  width: 100%;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #0a0a0a;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Change border color when the search input is focused */
+.search-input:focus {
+  border-color: #007BFF; /* You can change the color to fit your theme */
+}
+
+/* Add a bit of spacing between the search bar and the table */
+table {
+  margin-top: 10px;
+}
+
+/* Optional: Table styling for better visibility */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f4f4f4;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+

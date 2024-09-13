@@ -4,9 +4,11 @@ import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({ username: '', email: '' });
+  const [filteredUsers, setFilteredUsers] = useState([]); // To handle the filtered user list
+  const [newUser, setNewUser] = useState({ username: '', email: '', password: '' });
   const [editingUser, setEditingUser] = useState(null);
   const [error, setError] = useState('');
+  const [searchQuery, setSearchQuery] = useState(''); // State for search input
 
   // Fetch users from the API
   useEffect(() => {
@@ -14,6 +16,7 @@ const AdminDashboard = () => {
       try {
         const response = await axios.get('http://127.0.0.1:8000/api/users/');
         setUsers(response.data);
+        setFilteredUsers(response.data); // Set filtered users to all users initially
       } catch (err) {
         console.error('Failed to fetch users:', err);
       }
@@ -27,8 +30,9 @@ const AdminDashboard = () => {
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/users/create/', newUser);
       setUsers([...users, response.data]);
+      setFilteredUsers([...users, response.data]); // Update filtered users as well
       setNewUser({ username: '', email: '', password: '' });
-      setError('');  // Clear any previous errors
+      setError(''); // Clear any previous errors
     } catch (err) {
       console.error('Failed to create user:', err);
       setError('Failed to create user.');
@@ -42,11 +46,11 @@ const AdminDashboard = () => {
       const response = await axios.put(`http://127.0.0.1:8000/api/users/${editingUser.id}/update/`, editingUser);
       if (response.status === 200) {
         alert('User updated successfully');
-        // Update the user list after successful update
         const updatedUsers = users.map(user => (user.id === editingUser.id ? response.data : user));
         setUsers(updatedUsers);
+        setFilteredUsers(updatedUsers); // Update filtered users as well
         setEditingUser(null);
-        setError('');  // Clear any previous errors
+        setError(''); // Clear any previous errors
       }
     } catch (error) {
       console.error('Failed to update user:', error);
@@ -58,11 +62,28 @@ const AdminDashboard = () => {
   const handleDeleteUser = async (id) => {
     try {
       await axios.delete(`http://127.0.0.1:8000/api/users/${id}/delete/`);
-      setUsers(users.filter(user => user.id !== id));
-      setError('');  // Clear any previous errors
+      const updatedUsers = users.filter(user => user.id !== id);
+      setUsers(updatedUsers);
+      setFilteredUsers(updatedUsers); // Update filtered users as well
+      setError(''); // Clear any previous errors
     } catch (err) {
       console.error('Failed to delete user:', err);
       setError('Failed to delete user.');
+    }
+  };
+
+  // Handle search functionality
+  const handleSearch = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+
+    if (query === '') {
+      setFilteredUsers(users); // Reset to all users if the search query is empty
+    } else {
+      const filtered = users.filter(user =>
+        user.username.toLowerCase().includes(query) || user.email.toLowerCase().includes(query)
+      );
+      setFilteredUsers(filtered);
     }
   };
 
@@ -74,11 +95,20 @@ const AdminDashboard = () => {
           <li><a href="#users">Manage Users</a></li>
         </ul>
       </aside>
-      
+
       <main className="main-content">
         <section id="users">
           <h2>Manage Users</h2>
-          
+
+          {/* Search input */}
+          <input
+            type="text"
+            placeholder="Search by username or email"
+            value={searchQuery}
+            onChange={handleSearch}
+            className="search-input"
+          />
+
           {/* Display existing users */}
           <table>
             <thead>
@@ -90,7 +120,7 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user) => (
+              {filteredUsers.map((user) => (
                 <tr key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
