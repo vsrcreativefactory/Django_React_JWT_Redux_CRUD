@@ -88,3 +88,21 @@ h1 {
     border: 2px solid #ddd;
 }
 
+.save-changes-btn {
+    background-color: #957619; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 20px 0;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.save-changes-btn:hover {
+    background-color: #45a049; /* Darker green */
+}
+

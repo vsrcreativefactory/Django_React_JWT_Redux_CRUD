@@ -1,42 +1,39 @@
-/* Ensure the background image of the login page doesn't affect the homepage */
 .homepage {
-    position: relative; /* Ensure it’s positioned above any background layers */
-    z-index: 1; /* Make sure it’s layered above other elements */
-    background-color: #a3703d; /* Add a background color if necessary */
-    padding: 50px; /* Add some padding to give space around content */
-    min-height: 92vh; /* Ensure the homepage takes up the full viewport height */
-    display: flex; /* Flexbox to center content */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    color: #333; /* Text color for visibility */
-  }
-  
-  /* Add higher z-index for homepage elements */
-  .homepage h1, .homepage p {
-    position: relative; /* Ensure text stays on top */
-    z-index: 2; /* Ensure text and other elements are above everything */
-  }
-  .homepage h2{
-    position: relative; /* Ensure text stays on top */
-    z-index: 2;
-    color: #e5cebf;
+  position: relative;
+  z-index: 1;
+  background-color: #a3703d;
+  padding: 50px;
+  min-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
 
-  }
-  .profile-image {
-    margin: 20px auto;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: inline-block;
+.homepage h1, .homepage p {
+  position: relative;
+  z-index: 2;
+}
+
+.homepage h2 {
+  position: relative;
+  z-index: 2;
+  color: #e5cebf;
+}
+
+.profile-image {
+  margin: 20px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
 }
 
 .profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border: 2px solid #ddd;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 2px solid #ddd;
 }
-  
-  

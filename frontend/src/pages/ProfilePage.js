@@ -1,10 +1,12 @@
 import React, { useContext, useState } from 'react';
 import AuthContext from '../context/AuthContext';
 import './ProfilePage.css';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage = () => {
     const { user } = useContext(AuthContext);
     const [profileImage, setProfileImage] = useState(user?.profileImage || 'default-profile.png');
+    const navigate = useNavigate();
 
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
@@ -20,6 +22,10 @@ const ProfilePage = () => {
     if (!user) {
         return <h1>You need to login to access this page</h1>;
     }
+
+    const handleSaveChanges = () => {
+        navigate('/');
+    };
 
     return (
         <div className="profile-page">
@@ -39,6 +45,7 @@ const ProfilePage = () => {
                 <p><strong>Username:</strong> {user.username}</p>
                 <p><strong>Email:</strong> {user.username}@gmail.com</p>
                 {/* Add more details if available */}
+                <button onClick={handleSaveChanges} className="save-changes-btn">Save Changes</button>
             </div>
         </div>
     );

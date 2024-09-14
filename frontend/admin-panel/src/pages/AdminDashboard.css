@@ -16,7 +16,7 @@ body {
 
 /* Sidebar styling */
 .sidebar {
-    background-color: #007bff;
+    background-color: #2c63b5;
     color: white;
     padding: 20px;
     width: 250px;
@@ -24,6 +24,11 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+}
+.sidebar .logo {
+  display: block;
+  max-width: 100px; /* Adjust size as needed */
+  margin: 0 auto 20px auto; /* Center the logo and add spacing below */
 }
 
 .sidebar h2 {
@@ -158,4 +163,46 @@ table th {
 table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+
+/* General button styles */
+button {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 4px;
+    border: none;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  /* Edit button styles */
+  button.edit-btn {
+    background-color: #1c8c9e;  /* Green */
+    color: white;
+  }
+  
+  button.edit-btn:hover {
+    background-color: #218838;  /* Darker green on hover */
+  }
+  
+  /* Delete button styles */
+  button.delete-btn {
+    background-color: #dc3545;  /* Red */
+    color: white;
+  }
+  
+  button.delete-btn:hover {
+    background-color: #c82333;  /* Darker red on hover */
+  }
+  
+  /* Add icon styling for better appearance (optional) */
+  button i {
+    margin-right: 5px;
+  }
+  
+  /* Button spacing in table */
+  table td button {
+    margin: 0 5px;
+  }
+  
 

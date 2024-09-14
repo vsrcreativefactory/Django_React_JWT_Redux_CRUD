@@ -1,16 +1,9 @@
-/* Ensure the background image of the login page doesn't affect the About page */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
 .aboutpage {
     position: relative;
-    z-index: 1; /* Ensure it's layered above other elements */
-    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for a clean look */
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.8);
     padding: 50px;
-    min-height: 100vh; /* Full page height */
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,10 +11,9 @@
     color: #333;
 }
 
-/* Ensure all AboutPage elements are visible and layered properly */
 .aboutpage h1, .aboutpage p {
     position: relative;
-    z-index: 2; /* Make sure text is above everything */
+    z-index: 2;
 }
 
 .aboutpage p {

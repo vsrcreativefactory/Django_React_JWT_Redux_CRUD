@@ -4,11 +4,11 @@ import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]); // To handle the filtered user list
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [newUser, setNewUser] = useState({ username: '', email: '', password: '' });
   const [editingUser, setEditingUser] = useState(null);
   const [error, setError] = useState('');
-  const [searchQuery, setSearchQuery] = useState(''); // State for search input
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch users from the API
   useEffect(() => {
@@ -85,14 +85,27 @@ const AdminDashboard = () => {
       );
       setFilteredUsers(filtered);
     }
+
   };
+
+  const handleLogout = () => {
+      // Clear any authentication tokens or session data
+      localStorage.removeItem('authToken'); // Adjust according to your auth setup
+    
+      // Redirect to login page or any other page
+      window.location.href = 'http://localhost:3001/'; // Replace with the actual login route
+  };
+    
+
 
   return (
     <div className="admin-dashboard">
       <aside className="sidebar">
+      <h1 class="logo">Brain-D</h1>
         <h2>Admin Panel</h2>
         <ul>
           <li><a href="#users">Manage Users</a></li>
+          <li><a className="logout-btn" onClick={handleLogout}>Logout</a></li>
         </ul>
       </aside>
 
@@ -120,14 +133,19 @@ const AdminDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredUsers.map((user) => (
+              {filteredUsers.slice().reverse().map((user) => (
                 <tr key={user.id}>
                   <td>{user.id}</td>
                   <td>{user.username}</td>
                   <td>{user.email}</td>
                   <td>
-                    <button onClick={() => setEditingUser(user)}>Edit</button>
-                    <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+
+                  <button className="edit-btn" onClick={() => setEditingUser(user)}>
+                  <i className="fas fa-edit"></i> Edit
+                  </button>
+                  <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}>
+                  <i className="fas fa-trash"></i> Delete
+                  </button>
                   </td>
                 </tr>
               ))}
